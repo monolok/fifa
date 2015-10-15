@@ -17,19 +17,45 @@
 //= require jquery
 //= require bootstrap-sprockets
 
+alert("rrr");
 
-/*!
- * classie - class helper functions
- * from bonzo https://github.com/ded/bonzo
- * 
- * classie.has( elem, 'my-class' ) -> true/false
- * classie.add( elem, 'my-new-class' )
- * classie.remove( elem, 'my-unwanted-class' )
- * classie.toggle( elem, 'my-class' )
- */
 
-/*jshint browser: true, strict: true, undef: true */
-/*global define: false */
+var cbpAnimatedHeader = (function() {
+
+  var docElem = document.documentElement,
+    header = document.querySelector( '.navbar-default' ),
+    didScroll = false,
+    changeHeaderOn = 300;
+
+  function init() {
+    window.addEventListener( 'scroll', function( event ) {
+      if( !didScroll ) {
+        didScroll = true;
+        setTimeout( scrollPage, 250 );
+      }
+    }, false );
+  }
+
+  function scrollPage() {
+    var sy = scrollY();
+    if ( sy >= changeHeaderOn ) {
+      classie.add( header, 'navbar-shrink' );
+    }
+    else {
+      classie.remove( header, 'navbar-shrink' );
+    }
+    didScroll = false;
+  }
+
+  function scrollY() {
+    return window.pageYOffset || docElem.scrollTop;
+  }
+
+  init();
+
+})();
+
+// ************************** SECTION *************************
 
 ( function( window ) {
 
@@ -100,11 +126,7 @@ if ( typeof define === 'function' && define.amd ) {
 })( window );
 
 
-/*!
- * Start Bootstrap - Creative Bootstrap Theme (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
+// ************************** SECTION *************************
 
 (function($) {
     "use strict"; // Start of use strict
