@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  city: MyString
+  date: 2015-10-19
+  time: 2015-10-19 16:48:35
+  price: 1
+  prize: 1
+
+two:
+  city: MyString
+  date: 2015-10-19
+  time: 2015-10-19 16:48:35
+  price: 1
+  prize: 1
