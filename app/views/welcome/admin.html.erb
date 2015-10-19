@@ -1,1 +1,32 @@
-<p>admin</p>
+<%= console%>
+<div class="container-fluid">
+
+	<% if notice == "Saved"%>
+		<div class="row text-center bg-success">
+			<%= notice%>
+		</div>
+	<%else%>
+		<div class="row text-center bg-danger">
+			<%= notice%>
+		</div>	
+	<%end%>
+
+	<div class="row">
+		<div class="col-md-6">
+			<h3>New event</h3>
+			<%= form_for @event, url: {action: "admin"}, html: {class: "form-group"} do |f| %>
+				<%= f.text_field :city, :class => "form-control", :placeholder =>"City ?" %>
+			  	<%= f.text_field :address, :class => "form-control", :placeholder =>"Address ?" %>
+			  	<div class="form-inline">
+			  		<%= f.date_select(:date, prompt: { day: 'Select day', month: 'Select month', year: 'Select year' })%>
+			 	</div>
+				<%= f.time_select(:time, prompt: {hour: true}) %>
+				<%= f.number_field(:price, :placeholder =>"Price ?", :class => "form-control") %>
+				<%= f.number_field(:prize, :placeholder =>"Prize ?", :class => "form-control") %>				
+				<%= f.submit "Create", :class => "btn btn-default" %>
+			<% end %>			
+		</div>
+	</div>
+	
+</div>
+
