@@ -1,11 +1,13 @@
 class WelcomeController < ApplicationController
+before_action :authenticate_user!, only: [:admin, :event_create]
 
 def index
-	
+	@events = Event.all
 end
 
 def admin
 	@event = Event.new
+	@events = Event.all
 end
 
 def event_create
@@ -17,6 +19,13 @@ def event_create
 		flash[:notice] = "Not saved"
 		redirect_to :action => "admin"
 	end
+end
+
+def event_delete
+	@event = Event.find(params[:id])
+	@event.destroy
+	flash[:notice] = "Tournois supprimé"
+	redirect_to :action => "admin"
 end
 
 private
