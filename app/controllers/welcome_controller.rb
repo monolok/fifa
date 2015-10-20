@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
-before_action :authenticate_user!, only: [:admin, :event_create]
+before_action :authenticate_user!, only: [:admin, :event_create, :event_delete]
+before_action :check_if_admin!, only: [:admin, :event_create, :event_delete] 
 
 def index
 	@events = Event.all
@@ -32,6 +33,12 @@ private
 
 def event_params
 	params.require(:event).permit(:city, :address, :date, :time, :price, :prize)
+end
+
+def check_if_admin!
+	if not current_user.admin?
+		redirect_to root_path
+	end
 end
 
 end
